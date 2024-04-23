@@ -1,0 +1,14 @@
+import "strings";
+import "os";
+import "console";
+
+function readInput(filename : string) ([]string) {
+    var file string = os.readFile(filename);
+    var line []string; 
+    line = strings.splitN(file, "\n", -1);
+    return line;
+}
+
+function removeGameID(line : string, i : int) ([]string) {
+    var gamestr string;
+}

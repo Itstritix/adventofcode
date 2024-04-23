@@ -1,0 +1,81 @@
+import "strings";
+import "os";
+import "console";
+import "helpfunctions.ecla";
+import "regex";
+
+function getFirstDigit(strSplit : []string, strlen : int) (string) {
+    var firstDigit string;
+    for (var i int = 0, i < strlen, i++) {
+        if (strSplit[i] >= "0" && strSplit[i] <= "9") {
+            firstDigit = strSplit[i];
+            return firstDigit;
+        }
+    }    
+}
+
+function getLastDigit(strSplit : []string, strlen : int) (string) {
+    var lastDigit string;
+    for (var i int = strlen-1, i >= 0, i--) {
+        if (strSplit[i] >= "0" && strSplit[i] <= "9") {
+            lastDigit = strSplit[i];
+            return lastDigit;
+        }
+    }
+}
+
+function getFirstNb(strSplit : []string, line : string,  strlen : int, firstDigit : string) (string) {
+    var letterNb []string = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    var digit []string = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    var indexFirstNb int = strings.indexOf(line, firstDigit);
+    var indexOf int;
+    if (indexFirstNb != 0) {
+        for (i, k range letterNb) {
+        indexOf = strings.indexOf(line, k);
+            if (indexOf != -1) {
+                if (indexOf < indexFirstNb) {
+                        indexFirstNb = strings.indexOf(line, k);
+                        firstDigit = digit[i];
+                }
+            }
+        }
+        return firstDigit;
+    } else {
+        return firstDigit;
+    }
+}
+
+
+function getLastDigitIndex(strSplit : []string, strlen : int) (int) {
+    var lastDigit string;
+    for (var i int = strlen-1, i >= 0, i--) {
+        if (strSplit[i] >= "0" && strSplit[i] <= "9") {
+            return i;
+        }
+    }
+}
+
+
+function getLastNb(strSplit : []string, line : string,  strlen : int, lastDigitIndex : int, lastDigits : string, linenb : int) (string) {
+    var letterNb []string = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    var digit []string = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    var lastDigit string = lastDigits;
+    var newDigitIndex int = lastDigitIndex;
+    var NbIndex []int;
+    var NbIndexLen int;
+    var indexOf int;
+    if (lastDigitIndex < strlen) {
+        for (i, k range letterNb) {
+            NbIndex = regex.findAllIndex(k, line);
+            indexOf = strings.indexOf(line, k);
+            NbIndexLen = len(NbIndex)-1;
+            if (NbIndexLen > -1) {
+                if (newDigitIndex < NbIndex[NbIndexLen]) {
+                    lastDigit = digit[i];
+                    newDigitIndex = NbIndex[NbIndexLen];
+                }
+            }
+        }
+        }
+    return lastDigit;   
+}
